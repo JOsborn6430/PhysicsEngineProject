@@ -1,3 +1,4 @@
+// For the love of god we need to find something we can import for this shit
 public class Op {
     public static double[] vectorAdditionD(double[] v1, double[] v2) {
         double[] result = new double[v1.length];
