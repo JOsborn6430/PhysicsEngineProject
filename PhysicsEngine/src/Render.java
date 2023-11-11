@@ -4,8 +4,12 @@ public class Render {
 
     public static final int WIDTH = 700;
     public static final int HEIGHT = 400;
-    public static Graphics initGraphics() {
+
+    public static DrawingPanel initPanel() {
         DrawingPanel panel = new DrawingPanel(WIDTH, HEIGHT);
+        return panel;
+    }
+    public static Graphics initGraphics(DrawingPanel panel) {
         Graphics g = panel.getGraphics();
         g.setColor(Color.RED);
         return g;
@@ -16,7 +20,7 @@ public class Render {
             g.fillRect((int) ((Box) s).position[0] - ((Box) s).width/2, HEIGHT - (int) ((Box) s).position[1] - ((Box) s).height/2, ((Box) s).width, ((Box) s).height);
         }
         else if (s instanceof Circle) {
-            g.fillOval((int) s.position[0] - ((Circle) s).radius, (int) s.position[1] - ((Circle) s).radius, 2*((Circle) s).radius, 2*((Circle) s).radius);
+            g.fillOval((int) s.position[0] - ((Circle) s).radius, HEIGHT - (int) s.position[1] - ((Circle) s).radius, 2*((Circle) s).radius, 2*((Circle) s).radius);
         }
     }
 
