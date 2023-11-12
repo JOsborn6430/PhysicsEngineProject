@@ -33,19 +33,20 @@ public class Main {
         for (int steps = 0; steps < MAXSTEPS; steps++) {
 
             //Apply force of gravity
-            for (int i = 0; i < objects.length; i++) {
-                if (!objects[i].isAtRest && !objects[i].isStatic) {
-                    objects[i].forceActing[1] = -objects[i].mass*9.8;
+            if (GRAVITY) {
+                for (int i = 0; i < objects.length; i++) {
+                    if (!objects[i].isOnFloor && !objects[i].isStatic) {
+                        objects[i].forceActing[1] = -objects[i].mass * 9.8;
+                    }
                 }
             }
-
 
             //Move Objects
             for (int i = 0; i < objects.length; i++) {
 
                 // I converted everything into acceleration and velocity before making movement calculation
                 // I'm sure there is a more elegant way to do this.
-                // I was originally going to generalize everything to n-dimensions but i a too lazy so everything for here on is hard coded for 2d
+                // I was originally going to generalize everything to n-dimensions but i am too lazy so everything for here on is hard coded for 2d
 
                 double[] a = {0,0};
                 a[0] = objects[i].forceActing[0]/objects[i].mass;

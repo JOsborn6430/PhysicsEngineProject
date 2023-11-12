@@ -4,7 +4,7 @@ public class Shapes {
     double friction = 0;
 
     // Kinematic state
-    boolean isAtRest = false;
+    boolean isOnFloor = false;
     boolean isStatic = false;
     double[] momentum = {0,0}; //in Kg * m/s
     double[] position = {0,0}; //in m
