@@ -8,6 +8,9 @@ public class Main {
     public static final boolean GRAVITY = true;
 
     public static void main(String[] args) {
+
+        System.out.println();
+
         //Drawing Board initialization
         DrawingPanel panel = Render.initPanel();
         Graphics g = Render.initGraphics(panel);
