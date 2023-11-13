@@ -1,7 +1,10 @@
 public class Shapes {
+    // Testing attributes
+    String name = "";
     // Physical constants
     double mass = 1; //in Kg
     double friction = 0;
+    double bounce = 0.5;
 
     // Kinematic state
     boolean isOnFloor = false;
