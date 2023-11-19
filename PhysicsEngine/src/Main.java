@@ -107,8 +107,9 @@ public class Main {
                 }
             }
 
+            for (int k = 0; k < objects.length; k++) boxes[k].isOnFloor = false;
+
             // Box collision detection
-            for (int k = 0; k < boxes.length; k++) boxes[k].isOnFloor = false;
             for (int i = 0; i < boxes.length - 1; i++) {
                 for (int j = i + 1; j < boxes.length; j++) {
                     if (Math.abs(boxes[i].position[1] - boxes[j].position[1]) <= (boxes[i].height/2 + boxes[j].height/2) &&
