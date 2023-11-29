@@ -24,7 +24,7 @@ public class Main {
         b2.name = "Box 2";
         b2.height = 30;
         b2.width = 30;
-        b2.position = new double[]{150,300};
+        b2.position = new double[]{150,100};
 
         Box b3 = new Box();
         b3.name = "Box 3";
@@ -42,13 +42,13 @@ public class Main {
         c1.name = "c1";
         c1.mass = 3;
         c1.radius = 30;
-        c1.position = new double[]{300,300};
+        c1.position = new double[]{300,100};
 
         Circle c2 = new Circle();
         c2.name = "c2";
         c2.mass = 3;
-        c2.radius = 30;
-        c2.position = new double[]{300,300};
+        c2.radius = 5;
+        c2.position = new double[]{400,100};
 
         Box floor = new Box();
         floor.name = "floor";
@@ -60,7 +60,7 @@ public class Main {
         Shapes testShape = new Shapes();
 
         //Master Array
-        Shapes[] objects = {floor,b1,b2,b3,b4};
+        Shapes[] objects = {floor,b2,c1,c2};
 
         //create sub arrays
         // This stupid code sorts the master array into sub arrays of each object type. I will make working with large numbers of objects easier.
@@ -95,6 +95,26 @@ public class Main {
 //            System.out.println(boxes[i].name);
 //        }
 
+        // Create new init loop:
+        // How many boxes do you want?
+        // take input and create box array of that length.
+        // loop through new array, and use user input to init each field.
+
+        //Example
+        // C: How many boxes would you like?
+        // U: 3
+        // *Creates new array length 3
+        // C: Mass of box 1?
+        // U: 2
+        // C: x and y position of box 1?
+        // u: 100 300
+        // C: velocity of box 1?
+        // U: 20 0
+        // C: Mass of Box 2?
+        //.... repeat for all boxes
+
+
+
         //Main Loop
         for (int steps = 0; steps < MAXSTEPS; steps++) {
 
@@ -107,29 +127,50 @@ public class Main {
                 }
             }
 
-            for (int k = 0; k < objects.length; k++) boxes[k].isOnFloor = false;
+            for (int k = 0; k < objects.length; k++) objects[k].isOnFloor = false;
 
             // Box collision detection
             for (int i = 0; i < boxes.length - 1; i++) {
                 for (int j = i + 1; j < boxes.length; j++) {
-                    if (Math.abs(boxes[i].position[1] - boxes[j].position[1]) <= (boxes[i].height/2 + boxes[j].height/2) &&
-                            Math.abs(boxes[i].position[0] - boxes[j].position[0]) < (boxes[i].width/2 + boxes[j].width/2)) {
+                    if (Math.abs(boxes[i].position[1] - boxes[j].position[1]) <= (boxes[i].height/2.0 + boxes[j].height/2.0) &&
+                            Math.abs(boxes[i].position[0] - boxes[j].position[0]) < (boxes[i].width/2.0 + boxes[j].width/2.0)) {
                         boxes[i].isOnFloor = true;
                         boxes[j].isOnFloor = true;
 
                         if (!boxes[i].isStatic) {
                             boxes[i].momentum[1] *= -1 * boxes[i].bounce;
-                            boxes[i].position = Op.vectorAdditionD(boxes[i].position, Op.scalarMultiplyD(boxes[i].momentum, DT));
+                            boxes[i].position = Op.vectorAdditionD(boxes[i].position, Op.scalarMultiplyD(Op.scalarMultiplyD(boxes[i].momentum, DT), boxes[i].mass));
 
                         }
                         if (!boxes[j].isStatic) {
                             boxes[j].momentum[1] *= -1 * boxes[j].bounce;
-                            boxes[j].position = Op.vectorAdditionD(boxes[j].position, Op.scalarMultiplyD(boxes[j].momentum, DT));
+                            boxes[j].position = Op.vectorAdditionD(boxes[j].position, Op.scalarMultiplyD(Op.scalarMultiplyD(boxes[j].momentum, DT), boxes[j].mass));
                         }
 
                     }
                     }
                 }
+            //circle on box verticle collision
+            for (int i = 0; i < circles.length; i++) {
+                for (int j = 0; j < boxes.length; j++) {
+                    if (Math.abs(circles[i].position[1] - boxes[j].position[1]) <= (circles[i].radius + boxes[j].height/2.0) &&
+                            Math.abs(circles[i].position[0] - boxes[j].position[0]) < (circles[i].radius + boxes[j].width/2.0)) {
+                        circles[i].isOnFloor = true;
+                        boxes[j].isOnFloor = true;
+
+                        if (!circles[i].isStatic) {
+                            circles[i].momentum[1] *= -1 * circles[i].bounce;
+                            circles[i].position = Op.vectorAdditionD(circles[i].position, Op.scalarMultiplyD(Op.scalarMultiplyD(circles[i].momentum, DT), circles[i].mass));
+
+                        }
+                        if (!boxes[j].isStatic) {
+                            boxes[j].momentum[1] *= -1 * boxes[j].bounce;
+                            boxes[j].position = Op.vectorAdditionD(boxes[j].position, Op.scalarMultiplyD(Op.scalarMultiplyD(boxes[j].momentum, DT), boxes[j].mass));
+                        }
+
+                    }
+                }
+            }
 
 
 
@@ -169,6 +210,9 @@ public class Main {
             for (int i = 0; i < objects.length; i++) Render.drawObject(g, objects[i]);
             panel.sleep(10);
 
+            System.out.println("c1: " + c1.isOnFloor);
+            System.out.println("c2: " + c2.isOnFloor);
+            System.out.println("b1: " + b1.isOnFloor);
         } //end of main loop
     }
 }
