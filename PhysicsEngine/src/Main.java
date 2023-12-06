@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.image.CropImageFilter;
+import java.util.Scanner;
 
 public class Main {
 
@@ -57,43 +59,29 @@ public class Main {
         floor.width = 500;
         floor.position = new double[]{350,10};
 
-        Shapes testShape = new Shapes();
+        Scanner scanner = new Scanner(System.in);
 
-        //Master Array
-        Shapes[] objects = {floor,b2,c1,c2};
+        System.out.print("How many boxes do you want? ");
+        Box[] boxes = new Box[scanner.nextInt()];
+        for (int i = 0; i < boxes.length; i++) {
+            boxes[i] = new Box();
+        }
 
-        //create sub arrays
-        // This stupid code sorts the master array into sub arrays of each object type. I will make working with large numbers of objects easier.
-        // It also removes the need to check for specific object type when resolving collisions.
-        int boxArrayLength = 0;
-        for (int i = 0; i < objects.length; i++) if (objects[i] instanceof Box) boxArrayLength++;
-        Box[] boxes = new Box[boxArrayLength];
-        int boxesIndex = 0;
-        for (int i = 0; boxesIndex < boxArrayLength; i++) {
-            if (objects[i] instanceof Box) {
-                boxes[boxesIndex] = (Box)objects[i];
-                boxesIndex++;
-            }
+        for (int i = 0; i < boxes.length; i++) {
+            System.out.println("Height and width of box " + (i+1) + ": ");
+            boxes[i].height = scanner.nextInt();
+            boxes[i].width = scanner.nextInt();
+
+            System.out.println(boxes[i].height);
+            System.out.println(boxes[i].width);
         }
-        int circleArrayLength = 0;
-        for (int i = 0; i < objects.length; i++) if (objects[i] instanceof Circle) circleArrayLength++;
-        Circle[] circles = new Circle[circleArrayLength];
-        int circlesIndex = 0;
-        for (int i = 0; circlesIndex < circleArrayLength; i++) {
-            if (objects[i] instanceof Circle) {
-                circles[circlesIndex] = (Circle) objects[i];
-                circlesIndex++;
-            }
+
+
+        System.out.println("How many circles do you want? ");
+        Circle[] circles = new Circle[scanner.nextInt()];
+        for (int i = 0; i < circles.length; i++) {
+            circles[i] = new Circle();
         }
-        //test to make sure sorting worked
-//        System.out.println("Circles:");
-//        for (int i = 0; i < circles.length; i++) {
-//            System.out.println(circles[i].name);
-//        }
-//        System.out.println("Boxes:");
-//        for (int i = 0; i < boxes.length; i++) {
-//            System.out.println(boxes[i].name);
-//        }
 
         // Create new init loop:
         // How many boxes do you want?
@@ -112,6 +100,46 @@ public class Main {
         // U: 20 0
         // C: Mass of Box 2?
         //.... repeat for all boxes
+
+
+
+
+
+        //Master Array
+        Shapes[] objects = {floor,b2,c1,c2};
+
+        //create sub arrays
+        // This stupid code sorts the master array into sub arrays of each object type. I will make working with large numbers of objects easier.
+        // It also removes the need to check for specific object type when resolving collisions.
+//        int boxArrayLength = 0;
+//        for (int i = 0; i < objects.length; i++) if (objects[i] instanceof Box) boxArrayLength++;
+//        Box[] boxes = new Box[boxArrayLength];
+//        int boxesIndex = 0;
+//        for (int i = 0; boxesIndex < boxArrayLength; i++) {
+//            if (objects[i] instanceof Box) {
+//                boxes[boxesIndex] = (Box)objects[i];
+//                boxesIndex++;
+//            }
+//        }
+//        int circleArrayLength = 0;
+//        for (int i = 0; i < objects.length; i++) if (objects[i] instanceof Circle) circleArrayLength++;
+//        Circle[] circles = new Circle[circleArrayLength];
+//        int circlesIndex = 0;
+//        for (int i = 0; circlesIndex < circleArrayLength; i++) {
+//            if (objects[i] instanceof Circle) {
+//                circles[circlesIndex] = (Circle) objects[i];
+//                circlesIndex++;
+//            }
+//        }
+//        //test to make sure sorting worked
+//        System.out.println("Circles:");
+//        for (int i = 0; i < circles.length; i++) {
+//            System.out.println(circles[i].name);
+//        }
+//        System.out.println("Boxes:");
+//        for (int i = 0; i < boxes.length; i++) {
+//            System.out.println(boxes[i].name);
+//        }
 
 
 

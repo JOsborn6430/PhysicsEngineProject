@@ -17,6 +17,11 @@ public class Shapes {
 class Box extends Shapes {
     int height = 10;
     int width = 10;
+
+    public void Box() {
+        this.height = 0;
+        this.width = 0;
+    }
 }
 
 class Circle extends Shapes {
