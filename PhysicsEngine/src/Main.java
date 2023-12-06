@@ -10,9 +10,7 @@ public class Main {
     public static final boolean GRAVITY = true;
 
     public static void main(String[] args) {
-        //Drawing Board initialization
-        DrawingPanel panel = Render.initPanel();
-        Graphics g = Render.initGraphics(panel);
+
 
         //Create and initialize Objects
         Box b1 = new Box();
@@ -68,12 +66,12 @@ public class Main {
         }
 
         for (int i = 0; i < boxes.length; i++) {
-            System.out.println("Height and width of box " + (i+1) + ": ");
+            System.out.print("Height and width of box " + (i+1) + ": ");
             boxes[i].height = scanner.nextInt();
             boxes[i].width = scanner.nextInt();
+            System.out.print("Mass of Box" + (i+1) + ": ");
+            boxes[i].mass = scanner.nextInt();
 
-            System.out.println(boxes[i].height);
-            System.out.println(boxes[i].width);
         }
 
 
@@ -81,6 +79,14 @@ public class Main {
         Circle[] circles = new Circle[scanner.nextInt()];
         for (int i = 0; i < circles.length; i++) {
             circles[i] = new Circle();
+        }
+        for (int i = 0; i < circles.length; i++) {
+            System.out.print("Radius of circle " + (i+1) + ": ");
+            circles[i].radius = scanner.nextInt();
+            System.out.println(circles[i].radius);
+
+            System.out.print("Mass of Circle" + (i+1) + ": ");
+            circles[i].mass = scanner.nextInt();
         }
 
         // Create new init loop:
@@ -102,11 +108,25 @@ public class Main {
         //.... repeat for all boxes
 
 
-
-
-
         //Master Array
-        Shapes[] objects = {floor,b2,c1,c2};
+        //This code combines the two separate circle and box arrays into one master array
+        Shapes[] objects = new Shapes[boxes.length + circles.length];
+        for (int i = 0; i < boxes.length; i++) {
+            objects[i] = boxes[i];
+        }
+        for (int i = boxes.length; i < objects.length; i++) {
+            objects[i] = circles[i-boxes.length];
+        }
+
+        for (int i = 0; i < objects.length; i++) {
+            System.out.println(objects[i].mass);
+        }
+
+        //Drawing Board initialization
+        DrawingPanel panel = Render.initPanel();
+        Graphics g = Render.initGraphics(panel);
+
+
 
         //create sub arrays
         // This stupid code sorts the master array into sub arrays of each object type. I will make working with large numbers of objects easier.
