@@ -150,7 +150,7 @@ public class Main {
                     }
                     }
                 }
-            //circle on box verticle collision
+            //circle on box vertical collision
             for (int i = 0; i < circles.length; i++) {
                 for (int j = 0; j < boxes.length; j++) {
                     if (Math.abs(circles[i].position[1] - boxes[j].position[1]) <= (circles[i].radius + boxes[j].height/2.0) &&
@@ -210,9 +210,9 @@ public class Main {
             for (int i = 0; i < objects.length; i++) Render.drawObject(g, objects[i]);
             panel.sleep(10);
 
-            System.out.println("c1: " + c1.isOnFloor);
-            System.out.println("c2: " + c2.isOnFloor);
-            System.out.println("b1: " + b1.isOnFloor);
+//            System.out.println("c1: " + c1.isOnFloor);
+//            System.out.println("c2: " + c2.isOnFloor);
+//            System.out.println("b1: " + b1.isOnFloor);
         } //end of main loop
     }
 }
