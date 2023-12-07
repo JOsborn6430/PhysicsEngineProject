@@ -66,11 +66,16 @@ public class Main {
         }
 
         for (int i = 0; i < boxes.length; i++) {
+            System.out.print("Is box " + (i+1) + " static? (true or false): ");
+            boxes[i].isStatic = scanner.nextBoolean();
             System.out.print("Height and width of box " + (i+1) + ": ");
             boxes[i].height = scanner.nextInt();
             boxes[i].width = scanner.nextInt();
             System.out.print("Mass of Box" + (i+1) + ": ");
             boxes[i].mass = scanner.nextInt();
+            System.out.print("Position of Box" + (i+1) + ": ");
+            boxes[i].position = new double[]{scanner.nextInt(), scanner.nextInt()};
+
 
         }
 
